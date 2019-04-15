@@ -4,6 +4,7 @@ import { isNgTemplate } from '@angular/compiler';
 interface Todo {
   task: string;
   completed: boolean;
+  editing: boolean;
 }
 
 @Component({
@@ -19,35 +20,45 @@ export class AppComponent {
   hideTitle: boolean = true;
   private isButtonVisible = true;
   exists = true;
+  filterText: string = null;
 
   
   taskList: Todo[] = [
-    {task:'Walk the dog', completed: true},
-    {task:'Go to the store', completed: false},
-    {task:'Get gas', completed: false},
+    {task:'Walk the dog', completed: true, editing: false},
+    {task:'Go to the store', completed: false, editing: false},
+    {task:'Get gas', completed: false, editing: false},
   ];
-
+  filteredTodos = [...this.taskList]
 
   addTask = () => {
     const newTodo = {
       task: this.taskInput,
-      completed: false
+      completed: false,
+      editing: false,
     };
     this.taskList.push(newTodo);
+    this.filteredTodos = [...this.taskList];
     this.taskInput = null;
   };
 
+  toggleEdit = item => {
+    item.editing = !item.editing;
+  };
 
   completeTask = (index) => {
     this.taskList[index].completed = true;
   };
 
- 
-
   removeTask = (index) => {
     this.taskList.splice(index, 1);
+    this.filteredTodos = [...this.taskList];
   };
   
+  filterTodos = () => {
+    this.filteredTodos = this.taskList.filter(item => item.task.toLowerCase().includes(this.filterText.toLowerCase()));
+  };
+
+
   // filterResults = (arr) => {
   //   return arr.filter(el => el.toLowerCase().indexOf(this.task.toLowerCase()) > -1);
   //   };

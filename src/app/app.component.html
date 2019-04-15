@@ -4,16 +4,18 @@
   <p>A place to store the things you have to do!</p>
   <div class= "main">
     <div class="inputField">
-      <!-- <input type="text" placeholder="Filter your to-dos" (input) = "filterResults"/> -->
-      <input type="text" placeholder="Filter your to-dos" >
+      <input type="text" placeholder="Filter your to-dos" (input) = "filterTodos()" [(ngModel)]="filterText"/>
+      <!-- <input type="text" placeholder="Filter your to-dos" > -->
     </div>
     <ol>
       <!-- <div class="list"> -->
-        <li  *ngFor="let item of taskList; let i = index" >  
+          <li  *ngFor="let item of filteredTodos; let i = index;" >  
+        <!-- <li  *ngFor="let item of taskList; let i = index" >   -->
           <div class="list">
         <button (click)= "completeTask(i)" *ngIf="!item.completed" class="complete">Complete</button>
-        <p class= "para" [ngClass] = "{'linethrough': item.completed === true}">{{ item.task }}
+        <p *ngIf= "!item.editing" (dblclick)= "toggleEdit(item)" class= "para" [ngClass] = "{'linethrough': item.completed === true}">{{ item.task }}
          </p>
+         <input (blur)="toggleEdit(item)" *ngIf="item.editing" type="text" [(ngModel)]="item.task" />
           </div>
         <button (click) = "removeTask(i)" class="delete"><i class="fas fa-times"></i></button>
         
