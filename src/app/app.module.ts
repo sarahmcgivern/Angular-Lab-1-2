@@ -1,14 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+// import { OrderModule } from 'ngx-order-pipe';
 
 import { AppComponent } from './app.component';
-
+// import { FilterByStatusPipe } from './filter.pipe';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, 
   ],
   imports: [
-    BrowserModule
+    BrowserModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
