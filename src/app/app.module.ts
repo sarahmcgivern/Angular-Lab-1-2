@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // import { OrderModule } from 'ngx-order-pipe';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './todo.component';
 // import { FilterByStatusPipe } from './filter.pipe';
 @NgModule({
   declarations: [
